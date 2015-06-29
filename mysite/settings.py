@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'polls',
+    'stores',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -67,6 +68,14 @@ TEMPLATES = [
             ],
         },
     },
+    {
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'environment': 'mysite.jinja2.environment'
+        },
+    }
 ]
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
