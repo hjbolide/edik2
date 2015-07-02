@@ -75,5 +75,9 @@ class Contact(models.Model):
     pitch = models.FloatField(blank=True, null=True)
     store = models.ForeignKey(Store, blank=True, null=True)
 
+    @property
+    def store_name(self):
+        return self.store.name if self.store else 'NEW STORE'
+
     def __str__(self):
         return self.address

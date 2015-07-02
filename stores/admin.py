@@ -3,8 +3,8 @@ from django.http.response import HttpResponseRedirect
 from django.utils.decorators import available_attrs
 from functools import wraps
 
-from .models import Page, Store, Person
-from .forms import PersonAdminForm
+from .models import Page, Store, Person, Contact
+from .forms import PersonAdminForm, ContactAdminForm
 
 
 def filter_by_store(request, queryset):
@@ -68,6 +68,12 @@ class PersonAdmin(StoreBaseAdmin):
     form = PersonAdminForm
 
 
+class ContactAdmin(StoreBaseAdmin):
+    list_display = ('store_name', 'address', 'phone', 'mobile', 'email')
+    form = ContactAdminForm
+
+
 admin.site.register(Page)
 admin.site.register(Store, StoreAdmin)
 admin.site.register(Person, PersonAdmin)
+admin.site.register(Contact, ContactAdmin)

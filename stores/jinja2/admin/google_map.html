@@ -35,9 +35,9 @@
         var heading_id = '{{ pano_options.reflect_heading_elem_id }}';
         var pitch_id = '{{ pano_options.reflect_pitch_elem_id }}';
 
-        updatePanoPOV(pano, heading_id, pitch_id);
+        gmap.updatePanoPOV(pano, heading_id, pitch_id);
 
-        bindPanoPOVListener(pano, heading_id, pitch_id);
+        gmap.bindPanoPOVListener(pano, heading_id, pitch_id);
     {% endif %}
 
     var source_id = '{{ source_elem_id }}';
@@ -46,11 +46,11 @@
     var zoom_id = '{{ map_options.reflect_zoom_elem_id }}';
 
     django.jQuery('#' + source_id).change(function() {
-      updateMapPosition(map, pano, source_id, lat_id, lng_id);
+      gmap.updateMapPosition(map, pano, source_id, lat_id, lng_id);
     });
 
-    updateMapPosition(map, pano, source_id, lat_id, lng_id);
-    updateMapZoom(map, zoom_id);
-    bindMapZoomListener(map, zoom_id);
+    gmap.updateMapPosition(map, pano, source_id, lat_id, lng_id);
+    gmap.updateMapZoom(map, zoom_id);
+    gmap.bindMapZoomListener(map, zoom_id);
 
 </script>

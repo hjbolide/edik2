@@ -1,18 +1,19 @@
 /**
  * google map widget used in admin
  */
-(function (d$) {
-    function has(id) {
-        return id && d$('#' + id).length;
-    }
+(function (gmap, d$, undefined) {
 
-    function updateMapZoom(map, zoom_id) {
+    gmap.has = function (id) {
+        return id && d$('#' + id).length;
+    };
+
+    gmap.updateMapZoom = function (map, zoom_id) {
         if (!d$('#' + zoom_id).val())
             return;
         map.setZoom(parseInt(d$('#' + zoom_id).val()));
-    }
+    };
 
-    function updatePanoPOV(pano, source_heading_id, source_pitch_id) {
+    gmap.updatePanoPOV = function (pano, source_heading_id, source_pitch_id) {
 
         var heading = 0;
         var pitch = 0;
@@ -27,9 +28,9 @@
             heading: parseFloat(heading),
             pitch: parseFloat(pitch)
         });
-    }
+    };
 
-    function updateMapPosition(map, pano, source_id, lat_id, lng_id) {
+    gmap.updateMapPosition = function (map, pano, source_id, lat_id, lng_id) {
 
         if (!d$('#' + source_id).val())
             return;
@@ -50,11 +51,11 @@
                         if (pano)
                             pano.setPosition(position);
 
-                        if (has(lat_id)) {
+                        if (gmap.has(lat_id)) {
                             d$('#' + lat_id).val(position.k);
                         }
 
-                        if (has(lng_id)) {
+                        if (gmap.has(lng_id)) {
                             d$('#' + lng_id).val(position.A);
                         }
                     }
@@ -63,25 +64,26 @@
                     alert("Adresse Not Found;");
                 }
             });
-    }
+    };
 
-    function bindMapZoomListener(map, zoom_id) {
+    gmap.bindMapZoomListener = function (map, zoom_id) {
         google.maps.event.addListener(map, 'zoom_changed', function() {
             if (has(zoom_id))
                 d$('#' + zoom_id).val(map.getZoom());
         });
-    }
+    };
 
-    function bindPanoPOVListener(pano, heading_id, pitch_id) {
+    gmap.bindPanoPOVListener = function (pano, heading_id, pitch_id) {
 
         google.maps.event.addListener(pano, 'pov_changed', function(){
 
-            if (has(heading_id))
+            if (gmap.has(heading_id))
                 d$('#' + heading_id).val(pano.getPov().heading);
 
-            if (has(pitch_id))
+            if (gmap.has(pitch_id))
                 d$('#' + pitch_id).val(pano.getPov().pitch);
         });
 
-    }
-})(django.jQuery);
+    };
+
+})(window.gmap = window.gmap || {}, django.jQuery);
