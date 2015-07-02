@@ -3,7 +3,8 @@ from django.http.response import HttpResponseRedirect
 from django.utils.decorators import available_attrs
 from functools import wraps
 
-from .models import Page, Store
+from .models import Page, Store, Person
+from .forms import PersonAdminForm
 
 
 def filter_by_store(request, queryset):
@@ -26,6 +27,12 @@ def superuser_only_view(original_func):
 
 
 class StoreBaseAdmin(admin.ModelAdmin):
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj=obj, **kwargs)
+        form.current_user = request.user
+        return form
+
     def get_queryset(self, request):
         return filter_by_store(request, super().get_queryset(request))
 
@@ -56,5 +63,11 @@ class StoreAdmin(AdminOnlyModel):
     pass
 
 
+class PersonAdmin(StoreBaseAdmin):
+    list_display = ('full_name', 'date_of_birth', 'country')
+    form = PersonAdminForm
+
+
 admin.site.register(Page)
 admin.site.register(Store, StoreAdmin)
+admin.site.register(Person, PersonAdmin)

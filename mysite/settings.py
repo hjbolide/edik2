@@ -37,6 +37,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_countries',              # countries field
+    'taggit',                        # tags field
+    'sorl.thumbnail',
+    'topnotchdev.files_widget',
     'polls',
     'stores',
 )
@@ -95,9 +99,9 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-au'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Australia/Sydney'
 
 USE_I18N = True
 
@@ -110,3 +114,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# files_widget
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+FILES_WIDGET_TEMP_DIR = 'tmp/files_widget/'
+FILES_WIDGET_FILES_DIR = 'uploads/files_widget/'
+
+# google map
+GOOGLE_MAPS_API_KEY = 'AIzaSyBEx6VSQzHSqbNHykcI1TDSA0Om3h8ujaU'
+GOOGLE_MAPS_URL = 'https://maps.googleapis.com/maps/api/js?v=3.exp&key=%s&sensor=false'
+
+DEFAULT_MAP_CENTRE = -33.896281, 151.179963
+DEFAULT_MAP_ZOOM = 15
+
+# templates
+DEFAULT_TEMPLATE = 'techgut'

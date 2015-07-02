@@ -1,0 +1,56 @@
+<div id='{{ elem_id }}'
+     style='{% for style in elem_inline_styles %}{{ style }} {% endfor %}
+            {% if has_pano %}
+            float: left;
+            {% endif %}
+'>
+</div>
+{% if has_pano %}
+<div id="{{ elem_id }}_pano"
+        style='{% for style in elem_inline_styles %}{{ style }} {% endfor %}
+'>
+</div>
+{% endif %}
+
+<script type="text/javascript">
+
+    var latlng = new google.maps.LatLng({{ map_options.lat }}, {{ map_options.lng }});
+    var mapOptions = {
+      zoom: {{ map_options.zoom }},
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById('{{ elem_id }}'),  mapOptions);
+    var pano = undefined;
+    {% if has_pano %}
+        var panoOptions = {
+            position: latlng,
+            pov: {
+                heading: {{ pano_options.heading }},
+                pitch: {{ pano_options.pitch }}
+            }
+        };
+        pano = new google.maps.StreetViewPanorama(document.getElementById('{{ elem_id }}_pano'), panoOptions);
+        map.setStreetView(pano);
+        var heading_id = '{{ pano_options.reflect_heading_elem_id }}';
+        var pitch_id = '{{ pano_options.reflect_pitch_elem_id }}';
+
+        updatePanoPOV(pano, heading_id, pitch_id);
+
+        bindPanoPOVListener(pano, heading_id, pitch_id);
+    {% endif %}
+
+    var source_id = '{{ source_elem_id }}';
+    var lat_id = '{{ map_options.reflect_latitude_elem_id }}';
+    var lng_id = '{{ map_options.reflect_longitude_elem_id }}';
+    var zoom_id = '{{ map_options.reflect_zoom_elem_id }}';
+
+    django.jQuery('#' + source_id).change(function() {
+      updateMapPosition(map, pano, source_id, lat_id, lng_id);
+    });
+
+    updateMapPosition(map, pano, source_id, lat_id, lng_id);
+    updateMapZoom(map, zoom_id);
+    bindMapZoomListener(map, zoom_id);
+
+</script>

@@ -1,4 +1,5 @@
 from django.views import generic
+from django.conf import settings
 
 from .models import Page, Store
 
@@ -18,4 +19,4 @@ class DetailView(generic.DetailView):
     @property
     def template_name(self):
         store = self.get_object()
-        return 'stores/{}/index.html'.format(store.theme)
+        return 'stores/{}/index.html'.format(store.theme if store.theme else settings.DEFAULT_TEMPLATE)
