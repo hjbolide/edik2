@@ -1,0 +1,13 @@
+{
+  "name": "edik2",
+  "description": "edik2 nodejs",
+  "author": "Charles Huang <hjbolide@gmail.com>",
+  "dependencies": {
+    "cookie": "~0.1.3",
+    "querystring": "~0.2.0",
+    "redis": "~0.12.1",
+    "socket.io": "~1.3.5",
+    "socket.io-redis": "~0.1.4"
+  },
+  "engine": "node 0.12.3"
+}
