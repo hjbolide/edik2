@@ -135,3 +135,7 @@ DEFAULT_MAP_ZOOM = 15
 
 # templates
 DEFAULT_TEMPLATE = 'techgut'
+
+# redis
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379

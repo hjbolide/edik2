@@ -45,6 +45,8 @@
   <link rel="stylesheet" href="{{ static('stores/techgut/css/style.css') }}">
   <link rel="stylesheet" href="{{ static('stores/techgut/css/responsive.css') }}">
 
+  <script type="text/javascript" src="//localhost:4000/socket.io/socket.io.js"></script>
+
 <!--[if lt IE 9]>
 <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')
@@ -1340,8 +1342,15 @@ style="z-index: 3; max-width: 50px; max-height: 50px; white-space: nowrap;">
   </ul>
 </nav><!-- /#menu -->
 
-</div><!-- /.main -->
+  </div><!-- /.main -->
 
+  <div class="chat">
+  </div>
+  <div class="chat-input">
+    <input name="chat_input" type="text" class="form-control chat-input"/>
+  </div>
+
+  
 
 
 <!-- jQuery JS -->
@@ -1385,6 +1394,8 @@ style="z-index: 3; max-width: 50px; max-height: 50px; white-space: nowrap;">
 
 <!-- Email JS -->
 <script src="{{ static('stores/techgut/js/email.js') }}"></script>
+
+<script src="{{ static('stores/js/chat_client.js') }}"></script>
 
 <script>
 $(window).on('scroll', function(){

@@ -5,5 +5,6 @@ from . import views
 
 urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
+    url(r'^chatter$', views.chatter, name='chatter'),
     url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
 ]
