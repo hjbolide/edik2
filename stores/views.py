@@ -15,7 +15,7 @@ from .models import Page, Store
 
 
 class IndexView(generic.ListView):
-    template_name = 'stores/techgut/index.html'
+    template_name = 'stores/zVossen/index.html'
     context_object_name = 'stores'
 
     def get_queryset(self):
