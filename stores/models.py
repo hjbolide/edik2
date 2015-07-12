@@ -53,7 +53,7 @@ class Person(models.Model):
         return self.full_name
 
 
-class RosterRule(models.Model):
+class Roster(models.Model):
     week_mask = models.IntegerField(default=0)
     date = models.DateField(blank=True, null=True)
     person = models.ForeignKey(Person, blank=True, null=True)

@@ -1,4 +1,4 @@
-(function (chatter, $, undefined) {
+(function (chatter, undefined) {
 
     chatter.decode_message = function (message_buffer, locale) {
         var dataview = new DataView(message_buffer);
@@ -33,4 +33,4 @@
 
     chatter.init();
 
-})(window.chatter = window.chatter || {}, $);
+}(window.chatter = window.chatter || {}));

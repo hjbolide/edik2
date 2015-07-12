@@ -3,6 +3,7 @@
 {% block style %}
 {{ super() }}
 <link rel="stylesheet" href="{{ static('global/css/select2.min.css') }}">
+<link rel="stylesheet" href="{{ static('stores/css/styles.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -63,7 +64,15 @@
     <span>Request,design and book travel experiences as unique as you are</span>
     <center><div class="search-form">
       <form method="get" action="/search" id="search" class="f-right">
-        <input name="q" type="text" size="40" placeholder="Search here..." />
+        <select class="search_options" multiple="multiple">
+          {% for group, entries in search_context.items() %}
+          <optgroup label="{{ group|capitalize }}">
+            {% for entry in entries %}
+            <option value="{{group}}.{{entry}}">{{entry|capitalize}}:</option>
+            {% endfor %}
+          </optgroup>
+          {% endfor %}
+        </select>
         <input type="submit" name="Submit" value="Search">
       </form>
     </div></center>
@@ -427,12 +436,15 @@
     </div>
   </div>
 </footer>
+<div id="select2-container"></div>
 {% endblock %}
 {% block scripts %}
 {{ super() }}
-<script src="{{ static('global/js/select2.min.js') }}"></script>
+<script src="{{ static('global/js/select2.full.js') }}"></script>
 <script src="{{ static('stores/js/search.js') }}"></script>
 <script type="text/javascript">
-StoreSearch.init({{ search_context|tojson }});
+$(document).ready(function () {
+    StoreSearch.init({{ search_context|tojson }});
+});
 </script>
 {% endblock %}

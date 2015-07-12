@@ -1,0 +1,52 @@
+{% extends "admin/base_site.html" %}
+
+{% load i18n admin_static %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static 'global/css/bootstrap.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'global/css/bootstrap-theme.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/roster.css' %}" />
+{% endblock %}
+
+{% block extrahead %}
+<script type="text/javascript" src="{% static 'global/js/jquery-1.11.3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'global/js/underscore.js' %}"></script>
+<script type="text/javascript" src="{% static 'global/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'global/js/jquery.floatThead-slim.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    Roster
+  </div>
+  <table class="table">
+    <thead>
+      <th>Person</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Wednesday</th>
+      <th>Thursday</th>
+      <th>Friday</th>
+      <th>Saturday</th>
+      <th>Sunday</th>
+    </thead>
+    <tbody>
+      {% for i in 'qqqqqqqqqqqqqqqqq' %}
+      <tr>
+        <td>Lucy</td>
+        <td>yes</td>
+        <td>no</td>
+        <td>yes</td>
+        <td>yes</td>
+        <td>no</td>
+        <td>yes</td>
+        <td>no</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<script type="text/javascript" src="{% static 'admin/js/roster.js' %}"></script>
+{% endblock %}

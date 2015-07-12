@@ -86,4 +86,4 @@
 
     };
 
-})(window.gmap = window.gmap || {}, django.jQuery);
+}(window.gmap = window.gmap || {}, django.jQuery));

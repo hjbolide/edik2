@@ -1,10 +1,13 @@
 from django.contrib import admin
 from django.http.response import HttpResponseRedirect
 from django.utils.decorators import available_attrs
+from django.conf.urls import url
+from django.template.response import TemplateResponse
+
 from functools import wraps
 
-from .models import Page, Store, Person, Contact
-from .forms import PersonAdminForm, ContactAdminForm
+from .models import Page, Store, Person, Contact, Roster
+from .forms import PersonAdminForm, ContactAdminForm, RosterAdminForm
 
 
 def filter_by_store(request, queryset):
@@ -73,7 +76,31 @@ class ContactAdmin(StoreBaseAdmin):
     form = ContactAdminForm
 
 
+class RosterAdmin(StoreBaseAdmin):
+    def get_urls(self):
+        urls = super().get_urls()
+        my_urls = [
+            url(r'^.*/$', self.admin_site.admin_view(self.my_view, cacheable=True)),
+        ]
+
+        return my_urls + urls
+
+    def my_view(self, request):
+        context = dict(
+            self.admin_site.each_context(request),
+            key="hello"
+        )
+
+        return TemplateResponse(request, 'admin/roster.html', context)
+
+
+RosterAdmin.add_view = superuser_only_view(RosterAdmin.add_view)
+RosterAdmin.delete_view = superuser_only_view(RosterAdmin.delete_view)
+
+
+
 admin.site.register(Page)
 admin.site.register(Store, StoreAdmin)
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Contact, ContactAdmin)
+admin.site.register(Roster, RosterAdmin)

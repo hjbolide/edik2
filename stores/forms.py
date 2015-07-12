@@ -1,8 +1,8 @@
 from django import forms
 
 # local imports
-from .models import Contact, Person
-from .widgets import GoogleMapWidget, FilesWidget_ImagesWidget
+from .models import Contact, Person, Store
+from .widgets import GoogleMapWidget, FilesWidget_ImagesWidget, WeekMaskWidget
 
 
 class ModelFormByStore(forms.ModelForm):
@@ -54,3 +54,15 @@ class PersonAdminForm(HiddenFieldsForm):
         widgets = {
             'images': FilesWidget_ImagesWidget(),
         }
+
+
+class RosterAdminForm(ModelFormByStore):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['week_mask'].widget = WeekMaskWidget()
+        if self.current_user.is_superuser:
+            stores = Store.objects.all()
+        else:
+            stores = Store.objects.filter(pk__in=self.current_user.store_set.all)
+        entityids = Person.objects.filter(store__in=stores)
+        self.fields['person'].queryset = self.fields['person'].queryset.filter(pk__in=entityids)

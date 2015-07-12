@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'django_countries',              # countries field
     'taggit',                        # tags field
     'sorl.thumbnail',
+    'static_compiler',
     'topnotchdev.files_widget',
     'polls',
     'stores',
@@ -118,6 +119,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
+)
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'static_compiler.finders.StaticCompilerFinder',
 )
 
 # files_widget
