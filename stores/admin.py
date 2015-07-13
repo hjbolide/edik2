@@ -3,11 +3,14 @@ from django.http.response import HttpResponseRedirect
 from django.utils.decorators import available_attrs
 from django.conf.urls import url
 from django.template.response import TemplateResponse
+from django.contrib.auth.models import User
 
 from functools import wraps
+from itertools import groupby
 
-from .models import Page, Store, Person, Contact, Roster
+from .models import Page, Store, Person, Contact
 from .forms import PersonAdminForm, ContactAdminForm, RosterAdminForm
+from .view_models import PersonAdminViewModel
 
 
 def filter_by_store(request, queryset):
@@ -86,9 +89,14 @@ class RosterAdmin(StoreBaseAdmin):
         return my_urls + urls
 
     def my_view(self, request):
+        user = User.objects.get(username=request.user.username)
+        store = user.store_set.all()[0]
+        people = Person.objects.filter(store=store)
         context = dict(
             self.admin_site.each_context(request),
-            key="hello"
+            key="hello",
+            people=people,
+            store=store,
         )
 
         return TemplateResponse(request, 'admin/roster.html', context)
@@ -103,4 +111,4 @@ admin.site.register(Page)
 admin.site.register(Store, StoreAdmin)
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Contact, ContactAdmin)
-admin.site.register(Roster, RosterAdmin)
+admin.site.register(PersonAdminViewModel, RosterAdmin)

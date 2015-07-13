@@ -40,6 +40,7 @@ class Person(models.Model):
     tags = TaggableManager()
     store = models.ForeignKey(Store, blank=True, null=True)
     images = files_widget.ImagesField(blank=True, null=True)
+    roster = models.IntegerField(default=0)
 
     @property
     def full_name(self):
@@ -49,12 +50,32 @@ class Person(models.Model):
         result = split.join([self.first_name,self.last_name])
         return result if result else 'NEW'
 
+    def get_name_link(self):
+        return """
+        <a href="{%% static 'admin:stores_person_change' %s %%}">%s</a>
+        """ % (self.id, self.full_name)
+
+    def get_roster_content(self):
+        content = ''
+        for i in range(7):
+            content += """
+            <td><input type="checkbox" name="roster" {checked}/></td>
+            """.format(checked='checked="checked"' if 1<<i & self.roster != 0 else '')
+        return content
+
+    def get_roster_row(self):
+        return """
+        <tr>
+          <td>{name_link}</td>
+          {roster_content}
+        </tr>
+        """.format(name_link=self.get_name_link(), roster_content=self.get_roster_content())
+
     def __str__(self):
         return self.full_name
 
 
-class Roster(models.Model):
-    week_mask = models.IntegerField(default=0)
+class RosterDate(models.Model):
     date = models.DateField(blank=True, null=True)
     person = models.ForeignKey(Person, blank=True, null=True)
     store = models.ForeignKey(Store, blank=True, null=True)

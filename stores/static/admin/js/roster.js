@@ -1,3 +1,5 @@
 (function ($) {
     $('table.table').floatThead();
+
+    
 }($));

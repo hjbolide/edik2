@@ -3,3 +3,8 @@ table.floatThead-table {
     border-bottom: none;
     background-color: #FFF;
 }
+
+
+table.table {
+    margin-bottom: 0px;
+}
