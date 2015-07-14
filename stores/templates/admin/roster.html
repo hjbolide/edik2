@@ -15,9 +15,12 @@
 <script type="text/javascript" src="{% static 'global/js/jquery.floatThead-slim.js' %}"></script>
 {% endblock %}
 
+{% block crumbs %}
+&rsaquo;
+<a href="#">{% trans 'Stores' %}</a>
+{% endblock %}
+
 {% block content %}
-
-
 <div class="panel panel-default">
   <div class="panel-heading">Roster - {{ store.name }}</div>
   <table class="table">
