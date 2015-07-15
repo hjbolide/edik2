@@ -59,17 +59,29 @@ class Person(models.Model):
         content = ''
         for i in range(7):
             content += """
-            <td><input type="checkbox" name="roster" {checked}/></td>
-            """.format(checked='checked="checked"' if 1<<i & self.roster != 0 else '')
+            <td><input type="checkbox" name="roster_day" value="{i}" {checked}/></td>
+            """.format(
+                i=1<<i,
+                checked='checked="checked"' if 1<<i & self.roster != 0 else ''
+            )
         return content
 
     def get_roster_row(self):
         return """
-        <tr>
-          <td>{name_link}</td>
+        <tr data-edik-elem="roster_{id}">
+          <td>
+            {name_link}
+            <input type="hidden" name="person" value="{id}"/>
+            <input type="hidden" name="roster" value="{roster}"/>
+          </td>
           {roster_content}
         </tr>
-        """.format(name_link=self.get_name_link(), roster_content=self.get_roster_content())
+        """.format(
+            id=self.id,
+            roster=self.roster,
+            name_link=self.get_name_link(),
+            roster_content=self.get_roster_content()
+        )
 
     def __str__(self):
         return self.full_name

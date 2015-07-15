@@ -1,3 +1,24 @@
+.submit-row {
+    margin: 2px 0;
+    padding: 2px 3px;
+    vertical-align: middle;
+    font-family: "Lucida Grande", Verdana, Arial, sans-serif;
+    font-weight: normal;
+    font-size: 11px;
+}
+
+.submit-row input {
+    background: #fff url(../img/nav-bg.gif) bottom repeat-x;
+    padding: 3px 5px;
+    padding-top: 3px;
+    padding-right: 5px;
+    padding-bottom: 3px;
+    padding-left: 5px;
+    color: black;
+    border: 1px solid #bbb;
+    border-color: #ddd #aaa #aaa #ddd;
+}
+
 table.floatThead-table {
     border-top: none;
     border-bottom: none;
@@ -8,3 +29,4 @@ table.floatThead-table {
 table.table {
     margin-bottom: 0px;
 }
+

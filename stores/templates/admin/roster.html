@@ -5,24 +5,31 @@
 {% block extrastyle %}
 <link rel="stylesheet" type="text/css" href="{% static 'global/css/bootstrap.min.css' %}" />
 <link rel="stylesheet" type="text/css" href="{% static 'global/css/bootstrap-theme.min.css' %}" />
+{{ block.super }}
 <link rel="stylesheet" type="text/css" href="{% static 'admin/css/roster.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}" />
+
 {% endblock %}
 
 {% block extrahead %}
 <script type="text/javascript" src="{% static 'global/js/jquery-1.11.3.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'global/js/underscore.js' %}"></script>
+<script type="text/javascript" src="{% static 'global/js/backbone.js' %}"></script>
 <script type="text/javascript" src="{% static 'global/js/bootstrap.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'global/js/jquery.floatThead-slim.js' %}"></script>
+<script type="text/javascript" src="{% static 'global/js/jquery.cookie.js' %}"></script>
 {% endblock %}
 
 {% block crumbs %}
 &rsaquo;
-<a href="#">{% trans 'Stores' %}</a>
+<a href="{% url 'admin:app_list' 'stores' %}">{% trans 'Stores' %}</a>
+&rsaquo;
+{% trans 'Roster' %} - {{ store.name }}
 {% endblock %}
 
 {% block content %}
 <div class="panel panel-default">
-  <div class="panel-heading">Roster - {{ store.name }}</div>
+  <div class="panel-heading">{% trans 'Roster' %} - {{ store.name }}</div>
   <table class="table">
     <thead>
       <th>Person</th>
@@ -40,6 +47,9 @@
       {% endfor %}
     </tbody>
   </table>
+</div>
+<div class="submit-row">
+  <input type="button" value="{% trans 'Save' %}" class="default" data-edik-elem="roster-submit"/>
 </div>
 
 <script type="text/javascript" src="{% static 'admin/js/roster.js' %}"></script>

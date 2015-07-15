@@ -1,12 +1,16 @@
 from django.contrib import admin
+from django.http import HttpResponse
 from django.http.response import HttpResponseRedirect
 from django.utils.decorators import available_attrs
 from django.conf.urls import url
 from django.template.response import TemplateResponse
 from django.contrib.auth.models import User
+from django.views.decorators.http import require_http_methods
+
 
 from functools import wraps
 from itertools import groupby
+import json
 
 from .models import Page, Store, Person, Contact
 from .forms import PersonAdminForm, ContactAdminForm, RosterAdminForm
@@ -83,6 +87,7 @@ class RosterAdmin(StoreBaseAdmin):
     def get_urls(self):
         urls = super().get_urls()
         my_urls = [
+            url(r'^save/$', self.admin_site.admin_view(self.my_save)),
             url(r'^.*/$', self.admin_site.admin_view(self.my_view, cacheable=True)),
         ]
 
@@ -90,7 +95,7 @@ class RosterAdmin(StoreBaseAdmin):
 
     def my_view(self, request):
         user = User.objects.get(username=request.user.username)
-        store = user.store_set.all()[0]
+        store = request.user.store_set.all()[0]
         people = Person.objects.filter(store=store)
         context = dict(
             self.admin_site.each_context(request),
@@ -100,6 +105,11 @@ class RosterAdmin(StoreBaseAdmin):
         )
 
         return TemplateResponse(request, 'admin/roster.html', context)
+
+    def my_save(self, request):
+        return HttpResponse(json.dumps({
+            "success": True
+        }), content_type="application/json")
 
 
 RosterAdmin.add_view = superuser_only_view(RosterAdmin.add_view)
