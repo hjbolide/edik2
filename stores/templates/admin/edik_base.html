@@ -1,0 +1,37 @@
+{% extends "admin/base_site.html" %}
+{% load i18n admin_static %}
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'global/css/bootstrap.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'global/css/bootstrap-theme.min.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'admin/css/edik.css' %}" />
+{% endblock %}
+
+{% block extrahead %}
+{{ block.super }}
+<script type="text/javascript" src="{% static 'global/js/jquery-1.11.3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'global/js/underscore.js' %}"></script>
+<script type="text/javascript" src="{% static 'global/js/backbone.js' %}"></script>
+<script type="text/javascript" src="{% static 'global/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'global/js/jquery.floatThead-slim.js' %}"></script>
+<script type="text/javascript" src="{% static 'global/js/jquery.cookie.js' %}"></script>
+{% endblock %}
+
+
+{% block content %}
+{{ block.super }}
+
+{% block content_scripts %}
+<script type="text/javascript" src="//localhost:4000/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="{% static 'admin/js/admin_chat.js' %}"></script>
+<script>
+ $(document).ready(function () {
+     AdminChat.init({
+         socket_url: "http://localhost:4000"
+     });
+ });
+</script>
+{% endblock%}
+
+{% endblock %}

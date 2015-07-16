@@ -1,23 +1,10 @@
-{% extends "admin/base_site.html" %}
+{% extends "admin/edik_base.html" %}
 
 {% load i18n admin_static %}
 
 {% block extrastyle %}
-<link rel="stylesheet" type="text/css" href="{% static 'global/css/bootstrap.min.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'global/css/bootstrap-theme.min.css' %}" />
 {{ block.super }}
 <link rel="stylesheet" type="text/css" href="{% static 'admin/css/roster.css' %}" />
-<link rel="stylesheet" type="text/css" href="{% static 'admin/css/forms.css' %}" />
-
-{% endblock %}
-
-{% block extrahead %}
-<script type="text/javascript" src="{% static 'global/js/jquery-1.11.3.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'global/js/underscore.js' %}"></script>
-<script type="text/javascript" src="{% static 'global/js/backbone.js' %}"></script>
-<script type="text/javascript" src="{% static 'global/js/bootstrap.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'global/js/jquery.floatThead-slim.js' %}"></script>
-<script type="text/javascript" src="{% static 'global/js/jquery.cookie.js' %}"></script>
 {% endblock %}
 
 {% block crumbs %}
@@ -58,5 +45,9 @@
   <input type="button" value="{% trans 'Save' %}" class="default" data-edik-elem="roster-submit"/>
 </div>
 
+{% block content_scripts %}
+{{ block.super }}
 <script type="text/javascript" src="{% static 'admin/js/roster.js' %}"></script>
+{% endblock %}
+
 {% endblock %}
