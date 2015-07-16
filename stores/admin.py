@@ -6,6 +6,7 @@ from django.conf.urls import url
 from django.template.response import TemplateResponse
 from django.contrib.auth.models import User
 from django.views.decorators.http import require_http_methods
+from django.db import transaction
 
 
 from functools import wraps
@@ -107,6 +108,13 @@ class RosterAdmin(StoreBaseAdmin):
         return TemplateResponse(request, 'admin/roster.html', context)
 
     def my_save(self, request):
+        roster_mapping = request.POST
+        with transaction.atomic():
+            for personid, roster in roster_mapping.items():
+                person = Person.objects.get(pk=int(personid))
+                person.roster = int(roster)
+                person.save()
+
         return HttpResponse(json.dumps({
             "success": True
         }), content_type="application/json")

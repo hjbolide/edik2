@@ -24,6 +24,16 @@
             }
         },
 
+        collect_roster: function () {
+            var roster_data = {};
+            $('tr[data-edik-elem^="roster_"]').each(function (i, m) {
+                var $row = $(m);
+                roster_data[$row.find('input[name="person"]').val()] =
+                    $row.find('input[name="roster"]').val();
+            });
+            return roster_data;
+        },
+
         on_save: function () {
             $.ajaxSetup({
                 beforeSend: function (xhr, settings) {
@@ -33,11 +43,19 @@
             $.ajax({
                 url: "/admin/stores/personadminviewmodel/save/",
                 type: "POST",
-                data: {
-                    test: true
-                },
+                data: this.collect_roster(),
                 success: function (response) {
-                    console.log(response);
+                    var $alert_div = $('div.alert-div'),
+                        msg = '';
+                    if (response.success) {
+                        $alert_div.removeClass(['alert-danger']).addClass('alert-success');
+                        msg = "Successfully updated the roster.";
+                    } else {
+                        $alert_div.removeClass(['alert-success']).addClass('alert-danger');
+                        msg = "Failed to update roster.";
+                    }
+                    $alert_div.find('span[data-edik-elem="alert-msg"]').text(msg);
+                    $alert_div.fadeIn("fast").delay(2000).fadeOut("fast");
                 },
                 failure: function (error) {
                     console.log(error);

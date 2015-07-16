@@ -28,6 +28,12 @@
 {% endblock %}
 
 {% block content %}
+<div class="alert alert-dismissible alert-div" role="alert" style="display: none;">
+  <button type="button" class="close" data-dismiss="alert" aria-label="{% trans 'Close' %}">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <span data-edik-elem="alert-msg"></span>
+</div>
 <div class="panel panel-default">
   <div class="panel-heading">{% trans 'Roster' %} - {{ store.name }}</div>
   <table class="table">
