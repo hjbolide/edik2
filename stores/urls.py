@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^$', views.IndexView.as_view(), name='index'),
     url(r'^chatter$', views.chatter, name='chatter'),
     url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
+    url(r'^(?P<storeid>[0-9]+)/(?P<page>\w*)/$', name='page', view=views.page_view),
 ]

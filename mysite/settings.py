@@ -37,6 +37,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django_comments',
+    'django_markup',
+    'django_comments_xtd',
     'django_countries',              # countries field
     'taggit',                        # tags field
     'sorl.thumbnail',
@@ -112,6 +116,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+SITE_ID = 1
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
@@ -146,6 +151,10 @@ DEFAULT_TEMPLATE = 'techgut'
 # redis
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
+
+# comments
+COMMENTS_APP = "django_comments_xtd"
+COMMENTS_XTD_MAX_THREAD_LEVEL = 10
 
 
 LOGGING = {

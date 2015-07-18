@@ -64,7 +64,30 @@
             // scroll
             // steal focus
             // alert
+        },
+        bindSocket: function (socket) {
+            this.socket = socket;
+            var $input = $('input[name="chat_message_input"]');
+            $input.on('keyup', _.bind(function (e) {
+                var code = e.keyCode || e.which;
+                if (code === 13) {
+                    var msg = $input.val();
+                    var timestamp = new Date();
+                    this._on_send(msg);
+                    this.add_chat_entry('sent', {
+                        message_content: msg,
+                        message_timestamp: timestamp,
+                        message_timestamp_text: EDIK.timestamp(timestamp)
+                    });
+                    $input.val('');
+                }
+            }, this));
+        },
+        _on_send: function (msg) {
+            this.socket.emit('send_message', msg, function (data) {
+                console.log(data);
+            });
         }
     });
     NS.init();
-} (window.BaseChat = window.BaseChat || {}, $, _, io));
+} (window.ChatWidget = window.ChatWidget || {}, $, _, io));

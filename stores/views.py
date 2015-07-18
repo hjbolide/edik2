@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.sessions.models import Session
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseServerError
+from django.shortcuts import render
 
 import logging
 chat_log = logging.getLogger('chat')
@@ -37,10 +38,24 @@ class DetailView(generic.DetailView):
 
     model = Store
 
+#    def get_queryset(self):
+#        qs = super().get_queryset()
+#        qs.prefetch_related('pages').prefetch_related('persons').prefetch_related('rosters')
+#        return qs
+
     @property
     def template_name(self):
         store = self.get_object()
         return 'stores/{}/index.html'.format(store.theme if store.theme else settings.DEFAULT_TEMPLATE)
+
+
+def page_view(request, storeid, page):
+    store = Store.objects.get(pk=storeid)
+    if not page:
+        page = 'index'
+    theme = store.theme if store.theme else settings.DEFAULT_TEMPLATE
+    template = 'stores/{}/{}.html'.format(theme, page)
+    return render(request, template, { "object": store })
 
 
 @csrf_exempt

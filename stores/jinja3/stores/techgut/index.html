@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>TechGut</title>
+  <title>{{ object.name }}</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -46,7 +46,6 @@
   <link rel="stylesheet" href="{{ static('stores/techgut/css/responsive.css') }}">
 
   <script type="text/javascript" src="//localhost:4000/socket.io/socket.io.js"></script>
-
 <!--[if lt IE 9]>
 <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')
@@ -447,11 +446,9 @@ style="z-index: 3; max-width: 50px; max-height: 50px; white-space: nowrap;">
         </div>
         <div id="navbar" class="navbar-collapse collapse pull-right hidden-xs">
           <ul class="nav navbar-nav navbar-right">
-            <li ><a class="page-scroll" href="#home">Home</a></li>
-            <li> <a class="page-scroll" href="#about">about us</a></li>
-            <li> <a class="page-scroll" href="#services">services</a></li>
-            <li> <a class="page-scroll" href="#product">product</a></li>
-            <li> <a class="page-scroll" href="#team">team</a></li>
+            {% for p in object.page_set.all() %}
+            <li ><a class="page-scroll" href="#{{ p.name }}">{{ p.text }}</a></li>
+            {% endfor %}
             <li class="dropdown"> <a class="page-scroll drop dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href="#blog">blog</a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="blog-full-width.html">full-width Blog</a></li>
@@ -669,7 +666,7 @@ style="z-index: 3; max-width: 50px; max-height: 50px; white-space: nowrap;">
     </div>
   </div>
 
-
+{{ object.persons }}
 
   <div class="row">
     <div id="grid" class="shuffle" style="position: relative; height: 600px;">

@@ -1,3 +1,17 @@
 select.search_options {
     width: 400px;
 }
+
+ul.select2-selection__rendered {
+    color: white;
+    font-size: 16px !important;
+}
+
+li.select2-selection__choice {
+    background-color: #3ae !important;
+}
+
+li.select2-selection__choice span {
+    color: white !important;
+    font-size: 16px !important;
+}

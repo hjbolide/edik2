@@ -22,6 +22,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url(r'^files-widget/', include('topnotchdev.files_widget.urls')),
+    url(r'^comments/', include('django_comments_xtd.urls')),
     url(r'^stores/', include('stores.urls', namespace="stores")),
     url(r'^polls/', include('polls.urls', namespace="polls")),
     url(r'^admin/', include(admin.site.urls)),

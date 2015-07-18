@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
 <!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
@@ -19,11 +20,11 @@
   <!-- CSS
   ================================================== -->
   {% block style %}
-  <link rel="stylesheet" href="{{ static('stores/zVossen/css/zerogrid.css') }}">
-  <link rel="stylesheet" href="{{ static('stores/zVossen/css/style.css') }}">
-  <link rel="stylesheet" href="{{ static('stores/zVossen/css/responsive.css') }}">
-  <link rel="stylesheet" href="{{ static('global/css/bootstrap.min.css') }}">
-  <link rel="stylesheet" href="{{ static('global/css/bootstrap-theme.min.css') }}">
+  <link rel="stylesheet" href="{% static 'stores/zVossen/css/zerogrid.css' %}">
+  <link rel="stylesheet" href="{% static 'stores/zVossen/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'stores/zVossen/css/responsive.css' %}">
+  <link rel="stylesheet" href="{% static 'global/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'global/css/bootstrap-theme.min.css' %}">
   {% endblock %}
 
   <!--[if lt IE 8]>
@@ -34,17 +35,16 @@
   </div>
   <![endif]-->
   <!--[if lt IE 9]>
-  <script src="{{ static('stores/zVossen/js/html5.js') }}"></script>
-  <script src="{{ static('stores/zVossen/js/css3-mediaqueries.js') }}"></script>
+  <script src="{% static 'stores/zVossen/js/html5.js' %}"></script>
+  <script src="{% static 'stores/zVossen/js/css3-mediaqueries.js' %}"></script>
   <![endif]-->
 
   {% block scripts %}
-  <script src="{{ static('global/js/jquery-1.11.3.min.js') }}"></script>
-  <script src="{{ static('global/js/underscore.js') }}"></script>
-  <script src="{{ static('global/js/backbone.js') }}"></script>
-  <script src="{{ static('global/js/bootstrap.min.js') }}"></script>
-  <script src="{{ static('global/js/edik_string.js') }}"></script>
-  <script src="{{ static('global/js/require.js') }}"></script>
+  <script src="{% static 'global/js/jquery-1.11.3.min.js' %}"></script>
+  <script src="{% static 'global/js/underscore.js' %}"></script>
+  <script src="{% static 'global/js/backbone.js' %}"></script>
+  <script src="{% static 'global/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'global/js/edik_string.js' %}"></script>
   {% endblock %}
 
   {% endblock %}

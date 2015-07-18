@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+  {% block head %}
+    <!-- Basic Page Needs
+  ================================================== -->
+  <meta charset="utf-8">
+  <title>zVossen</title>
+  <meta name="description" content="Free Responsive Html5 Css3 Templates | zerotheme.com">
+  <meta name="author" content="www.zerotheme.com">
+
+  <!-- Mobile Specific Metas
+  ================================================== -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- CSS
+  ================================================== -->
+  {% block style %}
+  <link rel="stylesheet" href="{{ static('stores/zVossen/css/zerogrid.css') }}">
+  <link rel="stylesheet" href="{{ static('stores/zVossen/css/style.css') }}">
+  <link rel="stylesheet" href="{{ static('stores/zVossen/css/responsive.css') }}">
+  <link rel="stylesheet" href="{{ static('global/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ static('global/css/bootstrap-theme.min.css') }}">
+  {% endblock %}
+
+  <!--[if lt IE 8]>
+  <div style=' clear: both; text-align:center; position: relative;'>
+  <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+  <img src="//storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg" border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today." />
+  </a>
+  </div>
+  <![endif]-->
+  <!--[if lt IE 9]>
+  <script src="{{ static('stores/zVossen/js/html5.js') }}"></script>
+  <script src="{{ static('stores/zVossen/js/css3-mediaqueries.js') }}"></script>
+  <![endif]-->
+
+  {% block scripts %}
+  <script src="{{ static('global/js/jquery-1.11.3.min.js') }}"></script>
+  <script src="{{ static('global/js/underscore.js') }}"></script>
+  <script src="{{ static('global/js/backbone.js') }}"></script>
+  <script src="{{ static('global/js/bootstrap.min.js') }}"></script>
+  <script src="{{ static('global/js/edik_string.js') }}"></script>
+  {% endblock %}
+
+  {% endblock %}
+</head>
+<body>
+  <div class="wrap-body">{% block content %}{% endblock %}</div>
+</body>
+</html>
