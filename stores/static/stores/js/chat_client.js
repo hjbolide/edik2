@@ -1,4 +1,4 @@
-(function (NS, $, _, ChatWidget, undefined) {
+(function (NS, $, _, io, ChatWidget, undefined) {
 
     _.extend(NS, {
         init: function (options) {
@@ -12,23 +12,6 @@
             socket.on('connect', function () {
                 console.log('connect to agent');
             });
-
-            var $chat_panel = $('div.chat');
-            socket.on('message', function (resp) {
-                $chat_panel.append('<p>' + myself.decode_message(resp) + '</p>');
-                $chat_panel.focus();
-            });
-
-            var $chat_input = $('input[name="chat_input"]');
-            $chat_input.on('change', function (e) {
-                var msg = $chat_input.val();
-                if (msg.trim()) {
-                    socket.emit('send_message', msg, function (data) {
-                        console.log(data);
-                    });
-                }
-                $chat_input.val('');
-            });
         },
         decode_message: function (message_buffer, locale) {
             var dataview = new DataView(message_buffer);
@@ -37,4 +20,4 @@
         }
     });
 
-}(window.ChatClient = window.ChatClient || {}, $, _, window.ChatWidget));
+}(window.ChatClient = window.ChatClient || {}, $, _, io, window.ChatWidget));

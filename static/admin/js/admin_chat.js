@@ -1,4 +1,4 @@
-(function (NS, $, _, io, undefined) {
+(function (NS, $, _, io, ChatWidget, undefined) {
     _.extend(NS, {
         init: function (options) {
             this.options = options || {};
@@ -9,12 +9,10 @@
         },
         _bind_socket: function () {
             var socket = io.connect(this.options.socket_url);
+            ChatWidget.bindSocket(socket);
             socket.on('connect', function () {
                 console.log('connect to agent');
             });
-            socket.on('message', function (resp) {
-                console.log(resp);
-            });
         }
     });
-} (window.AdminChat = window.AdminChat || {}, $, _, io));
+} (window.AdminChat = window.AdminChat || {}, $, _, io, window.ChatWidget));

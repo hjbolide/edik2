@@ -13,10 +13,10 @@ class ModelFormByStore(forms.ModelForm):
         super().__init__(*args, **kwargs)
         if not self.current_user.is_superuser:
             if 'store' in self.fields:
-                self.fields['store'].queryset = self.current_user.site_set
-            for field, model in self.rel_field_model_map.iteritems():
+                self.fields['store'].queryset = self.current_user.store_set
+            for field, model in self.rel_field_model_map.items():
                 self.fields[field].queryset = model.objects.filter(
-                    store__in=self.current_user.site_set.all)
+                    store__in=self.current_user.store_set.all())
 
 
 class HiddenFieldsForm(ModelFormByStore):

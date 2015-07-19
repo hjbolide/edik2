@@ -1,4 +1,4 @@
-(function (NS, $, _, io, undefined) {
+(function (NS, $, _, io, EDIK, undefined) {
     _.extend(NS, {
         init: function (options) {
             this.options = options || {};
@@ -82,6 +82,14 @@
                     $input.val('');
                 }
             }, this));
+            socket.on('message', _.bind(function (msg) {
+                var timestamp = new Date();
+                this.add_chat_entry('receive', {
+                    message_content: msg,
+                    message_timestamp: timestamp,
+                    message_timestamp_text: EDIK.timestamp(timestamp)
+                });
+            }, this));
         },
         _on_send: function (msg) {
             this.socket.emit('send_message', msg, function (data) {
@@ -89,5 +97,7 @@
             });
         }
     });
+
     NS.init();
-} (window.ChatWidget = window.ChatWidget || {}, $, _, io));
+
+} (window.ChatWidget = window.ChatWidget || {}, $, _, io, window.EDIK));
